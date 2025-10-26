@@ -59,7 +59,7 @@ def go_to_manage_accounts(controller):
     else:
         # last resort: try to import and use show_page
         try:
-            from system_pages.manageAccounts import AccountManagerPage
+            from system_pages.manageAdminAccounts import AccountManagerPage
 
             go_to_page(controller, AccountManagerPage)
         except Exception:
@@ -77,3 +77,15 @@ def go_to_create_accounts(controller):
             go_to_page(controller, CreateAccountsPage)
         except Exception:
             print("Unable to open CreateAccountsPage")
+            
+def back_to_main(controller):
+        if hasattr(controller, "show_page_from_name"):
+            controller.show_page_from_name("MainMenuPage")
+        else:
+            # fallback: try to import MainMenuPage and show it
+            try:
+                from mainMenu import MainMenuPage
+
+                controller.show_page(MainMenuPage)
+            except Exception:
+                print("Unable to navigate back to main menu")

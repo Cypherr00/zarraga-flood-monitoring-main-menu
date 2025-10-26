@@ -3,9 +3,11 @@ import customtkinter as ctk
 from supabase_init import init_supabase
 
 from mainMenu import MainMenuPage
-from system_pages.manageAccounts import AccountManagerPage
+from system_pages.manageAdminAccounts import AccountManagerPage
 from system_pages.account_modifications.createAccounts import CreateAccountsPage
 from system_pages.account_modifications.editAccounts import EditAccountsPage
+from system_pages.systemSettings import SystemSettingsPage
+from system_pages.admin_account_management.adminCreateAccount import AdminCreateAccountPage
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
@@ -38,7 +40,9 @@ class MainFrame(ctk.CTk):
             MainMenuPage: MainMenuPage(parent=self.container, controller=self, account_page_class=AccountManagerPage),
             AccountManagerPage: AccountManagerPage(parent=self.container, controller=self),
             CreateAccountsPage: CreateAccountsPage(parent=self.container, controller=self),
-            EditAccountsPage: EditAccountsPage(parent=self.container, controller=self)
+            EditAccountsPage: EditAccountsPage(parent=self.container, controller=self),
+            SystemSettingsPage: SystemSettingsPage(parent=self.container, controller=self, admin_create_account_page=AdminCreateAccountPage, admin_edit_account_page=AdminCreateAccountPage),
+            AdminCreateAccountPage: AdminCreateAccountPage(parent=self.container, controller=self),
         }
 
         # layout pages (stack them)

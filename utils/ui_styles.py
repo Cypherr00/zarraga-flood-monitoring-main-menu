@@ -69,6 +69,7 @@ def get_fonts():
     return {
         "title": title_font(24),
         "water_level": label_font(16),
+        "label_font": label_font(16),
     }
 
 # === Padding ===

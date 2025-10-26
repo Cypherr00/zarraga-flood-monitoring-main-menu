@@ -1,4 +1,5 @@
 # File: mainMenu.py
+from system_pages.systemSettings import SystemSettingsPage
 import customtkinter as ctk
 import subprocess
 import os
@@ -85,4 +86,5 @@ class MainMenuPage(ctk.CTkFrame):
             show_error("Error", "Digital Twin executable not found.")
 
     def open_settings(self):
-        show_info("Info", "Settings module coming soon.")
+        go_to_page(self.controller, SystemSettingsPage)
+

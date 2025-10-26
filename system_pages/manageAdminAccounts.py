@@ -1,6 +1,7 @@
 import customtkinter as ctk
 from system_pages.account_modifications.createAccounts import CreateAccountsPage
 from system_pages.account_modifications.editAccounts import EditAccountsPage
+from navigation import back_to_main
 
 
 class AccountManagerPage(ctk.CTkFrame):
@@ -10,7 +11,7 @@ class AccountManagerPage(ctk.CTkFrame):
         self.main_page_class = main_page_class
         self.configure(width=600, height=400, corner_radius=20, fg_color="#1a1a1a")
 
-        ctk.CTkLabel(self, text="Account Management", font=ctk.CTkFont(size=24, weight="bold")).pack(pady=(30, 5))
+        ctk.CTkLabel(self, text="Admin Account Management", font=ctk.CTkFont(size=24, weight="bold")).pack(pady=(30, 5))
         ctk.CTkLabel(
             self,
             text="Create and manage user accounts for the mobile app.",
@@ -33,19 +34,7 @@ class AccountManagerPage(ctk.CTkFrame):
         ctk.CTkButton(
             self, text="Back to Main Menu", width=250,
             fg_color="#34495e", hover_color="#2c3e50",
-            command=self.back_to_main
+            command=lambda: back_to_main(self.controller)
         ).pack(pady=20)
 
-    def back_to_main(self):
-        # Use controller to navigate back to the main menu by name to avoid
-        # circular imports and undefined names.
-        if hasattr(self.controller, "show_page_from_name"):
-            self.controller.show_page_from_name("MainMenuPage")
-        else:
-            # fallback: try to import MainMenuPage and show it
-            try:
-                from mainMenu import MainMenuPage
-
-                self.controller.show_page(MainMenuPage)
-            except Exception:
-                print("Unable to navigate back to main menu")
+    
