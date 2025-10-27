@@ -8,6 +8,8 @@ from system_pages.account_modifications.createAccounts import CreateAccountsPage
 from system_pages.account_modifications.editAccounts import EditAccountsPage
 from system_pages.systemSettings import SystemSettingsPage
 from system_pages.admin_account_management.adminCreateAccount import AdminCreateAccountPage
+from system_pages.admin_account_management.adminConfigureAccount import adminConfigureAccountsPage
+from loginPage import LoginPage
 
 ctk.set_appearance_mode("dark")
 ctk.set_default_color_theme("blue")
@@ -41,8 +43,10 @@ class MainFrame(ctk.CTk):
             AccountManagerPage: AccountManagerPage(parent=self.container, controller=self),
             CreateAccountsPage: CreateAccountsPage(parent=self.container, controller=self),
             EditAccountsPage: EditAccountsPage(parent=self.container, controller=self),
-            SystemSettingsPage: SystemSettingsPage(parent=self.container, controller=self, admin_create_account_page=AdminCreateAccountPage, admin_edit_account_page=AdminCreateAccountPage),
+            SystemSettingsPage: SystemSettingsPage(parent=self.container, controller=self, admin_create_account_page=AdminCreateAccountPage, admin_configure_account_page=adminConfigureAccountsPage),
             AdminCreateAccountPage: AdminCreateAccountPage(parent=self.container, controller=self),
+            adminConfigureAccountsPage: adminConfigureAccountsPage(parent=self.container, controller=self),
+            LoginPage: LoginPage(parent=self.container, controller=self),
         }
 
         # layout pages (stack them)
@@ -50,12 +54,12 @@ class MainFrame(ctk.CTk):
             p.grid(row=0, column=0, sticky="nsew")
 
         # show initial page
-        self.show_page(MainMenuPage)
-
+        self.show_page(LoginPage)
+       
         # status bar
         self.status_bar = ctk.CTkLabel(
             self,
-            text="Database: Connected" if self._test_connection() else "Database: Disconnected",
+            text=f"Database: Connected" if self._test_connection() else "Database: Disconnected",
             anchor="w",
             font=ctk.CTkFont(size=12),
             text_color="#7f8c8d"

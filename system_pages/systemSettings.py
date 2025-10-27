@@ -8,11 +8,11 @@ FONTS = get_fonts()
 
 
 class SystemSettingsPage(ctk.CTkFrame):
-    def __init__(self, parent, controller, admin_create_account_page=None, admin_edit_account_page=None):
+    def __init__(self, parent, controller, admin_create_account_page=None, admin_configure_account_page=None):
         super().__init__(parent)
         self.controller = controller
         self.AdminCreateAccountPage = admin_create_account_page
-        self.AdminConfigureAccountPage = admin_edit_account_page
+        self.AdminConfigureAccountPage = admin_configure_account_page
 
         self.configure(
             width=600,

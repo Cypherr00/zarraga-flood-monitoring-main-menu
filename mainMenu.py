@@ -11,11 +11,13 @@ from utils.ui_styles import COLORS, get_fonts, PADDING
 FONTS = get_fonts()
 
 
+
 class MainMenuPage(ctk.CTkFrame):
     def __init__(self, parent, controller, account_page_class=None):
         super().__init__(parent)
         self.controller = controller
         self.account_page_class = account_page_class
+        
 
         self.configure(
             width=600,
@@ -23,11 +25,13 @@ class MainMenuPage(ctk.CTkFrame):
             corner_radius=20,
             fg_color=COLORS["background"]
         )
+        user = self.controller.supabase.auth.get_user()
+        username = user.user.email if user and user.user else "Guest"
 
         # Header
         self.title_label = ctk.CTkLabel(
             self,
-            text="Zarraga Flood Monitoring System",
+            text=f"Zarraga Flood Monitoring System ({username})",
             font=FONTS["title"]
         )
         self.title_label.pack(pady=PADDING["title_y"])
